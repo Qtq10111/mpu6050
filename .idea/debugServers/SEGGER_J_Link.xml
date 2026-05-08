@@ -1,0 +1,13 @@
+<component name="DebugServers">
+  <jlink-debug-target name="SEGGER J-Link" uniqueID="b77841f4-d1e4-4e05-86d5-ae2d382a678b" selected="true">
+    <debugger version="1">
+      <debugger kind="GDB" isBundled="true" />
+      <env />
+    </debugger>
+    <gdbserver exe="$PROJECT_DIR$/../../jlinkdrive/JLink_V896/JLinkGDBServerCL.exe" />
+    <console enabled="false" port="2334" />
+    <target device="STM32F407VE" reset-before="false" />
+    <connection extended-remote="false" port="4444" warmup-ms="500" />
+    <swo />
+  </jlink-debug-target>
+</component>
