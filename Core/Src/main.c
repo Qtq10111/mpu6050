@@ -50,8 +50,8 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-int count1;
-int count2;
+// int count1;
+// int count2;
 float SPEED1;
 float SPEED2;
 encoder CODER1;
@@ -117,12 +117,12 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    // HAL_GPIO_WritePin(GPIOA,GPIO_PIN_2,GPIO_PIN_RESET );
-    // HAL_GPIO_WritePin(GPIOA,GPIO_PIN_3,GPIO_PIN_SET);
-    // HAL_GPIO_WritePin(GPIOC,GPIO_PIN_8,GPIO_PIN_SET);
-    // HAL_GPIO_WritePin(GPIOC,GPIO_PIN_9,GPIO_PIN_RESET);
-    // __HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,400);
-    // __HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_2,400);
+     HAL_GPIO_WritePin(GPIOA,GPIO_PIN_2,GPIO_PIN_SET );
+     HAL_GPIO_WritePin(GPIOA,GPIO_PIN_3,GPIO_PIN_RESET);
+     HAL_GPIO_WritePin(GPIOC,GPIO_PIN_8,GPIO_PIN_SET);
+     HAL_GPIO_WritePin(GPIOC,GPIO_PIN_9,GPIO_PIN_RESET);
+     __HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,350);
+     __HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_2,350);
   }
   /* USER CODE END 3 */
 }
@@ -175,17 +175,11 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
-  if (htim->Instance == TIM3) {
-    if (__HAL_TIM_IS_TIM_COUNTING_DOWN(&htim3)) CODER1.overflowNUM --;
-    else CODER1.overflowNUM ++;
-  }else if (htim->Instance == TIM4) {
-    if (__HAL_TIM_IS_TIM_COUNTING_DOWN(&htim4))CODER2.overflowNUM --;
-    else CODER2.overflowNUM ++;
-  }else if (htim->Instance == TIM2) {
-    count1 = __HAL_TIM_GetCounter(&htim3);
-    count2 = __HAL_TIM_GetCounter(&htim4);
-    SPEED1 = Speed_calculate(0.1,4,13,20,PI * wheel,&CODER1,count1);
-    SPEED2 = Speed_calculate(0.1,4,13,20,PI * wheel,&CODER2,count2);
+ if (htim->Instance == TIM2) {
+    // count1 = __HAL_TIM_GetCounter(&htim3);
+    // count2 = __HAL_TIM_GetCounter(&htim4);
+    SPEED1 = Speed_calculate(0.1,4,13,20,PI * wheel,&CODER1,&htim3);
+    SPEED2 = Speed_calculate(0.1,4,13,20,PI * wheel,&CODER2,&htim4);
   }
 }
 
